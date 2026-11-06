@@ -1,0 +1,53 @@
+==============================================================================
+ROGELIO v2.7 - EL VETERANO (rutina diaria a las 08:00 UTC)
+==============================================================================
+Riesgo por operación 1.5% | día tranquilo: hasta 3 ops, hasta 3 días | día movido: hasta 2 ops, hasta 1 día | turbulento: no opera
+
+######## 20 MONEDAS ORIGINALES ########
+  Días evaluados: 2481 | tranquilos 60%, movidos 28%, turbulentos 13%
+  Días con al menos una operación: 16% | operaciones por día (promedio): 0.26 | candidatas vigentes por día: 0.43
+  Operaciones: 652 | win rate 41.7% | expectativa -0.007R
+  CAGR -3.1% | caída máxima -34.4% | Sharpe -0.09 | t mensual -0.16 | P(caída > 20%) 99%
+  Antes de 2024: CAGR -1.5%, Sharpe 0.00 | Después de 2024: CAGR -5.3%, Sharpe -0.21, t mensual -0.22
+
+  Por tipo de día:
+           operaciones  win_rate  expectativa_R  ganancia_usdt  velas_medias
+tipo_dia                                                                    
+movido             121     0.421         -0.067       -133.324         4.992
+tranquilo          531     0.416          0.006        -53.090        12.132
+
+  Por estrategia de origen:
+            operaciones  win_rate  expectativa_R  ganancia_usdt  velas_medias
+estrategia                                                                   
+batacazo            436     0.429          0.037        162.350        11.294
+comprador            93     0.387         -0.172       -239.076         9.290
+vendedor            123     0.398         -0.042       -109.688        10.228
+
+  Ganancia por año (USDT): 2020: +120, 2021: -2, 2022: -307, 2023: +135, 2024: -13, 2025: +9, 2026: -128
+
+######## 40 MONEDAS ########
+  Días evaluados: 2481 | tranquilos 60%, movidos 28%, turbulentos 13%
+  Días con al menos una operación: 22% | operaciones por día (promedio): 0.38 | candidatas vigentes por día: 0.74
+  Operaciones: 948 | win rate 39.5% | expectativa -0.048R
+  CAGR -12.5% | caída máxima -64.4% | Sharpe -0.53 | t mensual -1.22 | P(caída > 20%) 100%
+  Antes de 2024: CAGR -12.7%, Sharpe -0.57 | Después de 2024: CAGR -12.2%, Sharpe -0.48, t mensual -0.71
+
+  Por tipo de día:
+           operaciones  win_rate  expectativa_R  ganancia_usdt  velas_medias
+tipo_dia                                                                    
+movido             159     0.384         -0.087       -164.472         5.208
+tranquilo          789     0.397         -0.040       -419.810        12.047
+
+  Por estrategia de origen:
+            operaciones  win_rate  expectativa_R  ganancia_usdt  velas_medias
+estrategia                                                                   
+batacazo            594     0.401         -0.039       -268.316        11.350
+comprador           124     0.339         -0.193       -294.394         9.653
+vendedor            230     0.409          0.005        -21.572        10.409
+
+  Ganancia por año (USDT): 2020: +91, 2021: -132, 2022: -374, 2023: +11, 2024: -2, 2025: -73, 2026: -105
+
+######## COMPARACIÓN DE REFERENCIA ########
+  v2.5 (20 monedas, escala 1,5): CAGR 23,7% | caída −13,2% | Sharpe 1,18 | t mensual 2,44
+  El veterano gana la comparación solo si mejora el Sharpe (ganancia por unidad de riesgo),
+  sobre todo DESPUÉS de 2024. Más ganancia con más caída no es una mejora.

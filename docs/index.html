@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rogelio Bot Trading — repetición del backtest</title>
+<meta name="description" content="Rogelio es un sistema de trading algorítmico para futuros cripto. Mirá, vela por vela, cómo operó en seis años de historia.">
+<meta property="og:title" content="Rogelio Bot Trading — un sistema que opera cuando las probabilidades están de su lado">
+<meta property="og:description" content="Repetición interactiva del backtest 2021–2026: cada operación, por qué entró y cómo terminó.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312212E'/%3E%3Cpath d='M4 19h7l2-2 2 2 3-11 3 15 2-5h5' fill='none' stroke='%23F2F5F7' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<a class="saltar" href="#repeticion">Ir a la repetición</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__fila">
+    <a class="marca" href="#">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 19h8l2-2 2 2 3-11 3 15 2-5h6" /></svg>
+      Rogelio Bot Trading
+    </a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#repeticion">Repetición</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#riesgo">Riesgo</a>
+      <a href="#como-decide">Cómo decide</a>
+      <a href="#proyecto">El proyecto</a>
+    </nav>
+    <a class="boton boton--borde" id="enlace-github-cab" href="#" target="_blank" rel="noopener">Ver el código</a>
+  </div>
+</header>
+
+<div class="aviso-demo" id="aviso-demo" hidden>
+  <div class="contenedor">
+    Estás viendo <strong>datos de demostración</strong> inventados para probar la página. No son los resultados de Rogelio.
+  </div>
+</div>
+
+<main>
+  <section class="intro contenedor">
+    <h1>Rogelio no opera todos los días. Opera cuando las probabilidades están de su lado.</h1>
+    <p class="intro__texto">
+      Es un sistema de trading algorítmico para futuros de criptomonedas que diseñé y programé en Python.
+      Abajo podés ver, vela por vela, cómo operó en seis años de historia: dónde entró, cuánto arriesgó y cómo terminó cada operación.
+    </p>
+  </section>
+
+  <!-- Repetición -->
+  <section class="repeticion" id="repeticion" aria-labelledby="titulo-rep">
+    <div class="contenedor">
+      <div class="pantalla" id="pantalla" tabindex="-1">
+        <div class="pantalla__barra">
+          <h2 id="titulo-rep" class="pantalla__titulo">Repetición del backtest</h2>
+          <label class="campo">
+            <span>Moneda</span>
+            <select id="sel-moneda"></select>
+          </label>
+          <div class="filtros" role="group" aria-label="Estrategias que se muestran" id="filtros"></div>
+          <div class="pantalla__fecha" aria-live="off">
+            <span id="fecha-actual">—</span>
+            <small>hora UTC</small>
+          </div>
+        </div>
+
+        <div class="pantalla__cuerpo">
+          <div class="grafico">
+            <canvas id="lienzo-velas" aria-label="Gráfico de velas de 4 horas con las operaciones de Rogelio" role="img"></canvas>
+            <div class="grafico__cargando" id="cargando">Cargando velas…</div>
+            <div class="grafico__zoom">
+              <button type="button" id="btn-alejar" aria-label="Alejar">−</button>
+              <button type="button" id="btn-acercar" aria-label="Acercar">+</button>
+              <button type="button" id="btn-seguir" class="grafico__seguir" hidden>Volver al presente</button>
+            </div>
+          </div>
+
+          <aside class="ficha" aria-live="polite">
+            <div id="ficha-contenido" class="ficha__contenido">
+              <p class="ficha__vacia">Dale play: cuando Rogelio entre a una operación, acá vas a ver por qué y cómo le fue.</p>
+            </div>
+            <div class="ficha__acumulado" id="ficha-acumulado"></div>
+          </aside>
+        </div>
+
+        <div class="controles">
+          <button type="button" class="control" id="btn-anterior" aria-label="Operación anterior">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 5l-9 7 9 7z"/></svg>
+          </button>
+          <button type="button" class="control control--play" id="btn-play" aria-label="Reproducir">
+            <svg class="icono-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5l13 7.5-13 7.5z"/></svg>
+            <svg class="icono-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h3.5v16H7zM13.5 4H17v16h-3.5z"/></svg>
+          </button>
+          <button type="button" class="control" id="btn-siguiente" aria-label="Operación siguiente">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l9 7-9 7z"/></svg>
+          </button>
+          <div class="velocidades" role="group" aria-label="Velocidad" id="velocidades"></div>
+          <input type="range" id="linea-tiempo" class="linea-tiempo" min="0" max="1" value="0" step="1" aria-label="Fecha de la repetición">
+        </div>
+
+        <ul class="leyenda">
+          <li><i class="m m--sube"></i>Vela que subió</li>
+          <li><i class="m m--baja"></i>Vela que bajó</li>
+          <li><i class="m m--zona-obj"></i>Zona hasta el objetivo</li>
+          <li><i class="m m--zona-stop"></i>Zona hasta el stop</li>
+          <li><i class="m m--linea"></i>Tendencia de fondo (media de 200 velas)</li>
+          <li class="leyenda__ayuda">Arrastrá para moverte, usá la rueda o los botones para el zoom y tocá una operación para ver su ficha.</li>
+        </ul>
+      </div>
+
+      <p class="nota-r">
+        <strong>¿Qué es R?</strong> Es lo que arriesga cada operación: lo que se pierde si toca el stop.
+        Un resultado de +2 R significa que ganó el doble de lo que arriesgaba; −1 R, que perdió lo previsto.
+      </p>
+    </div>
+  </section>
+
+  <!-- Resultados -->
+  <section class="seccion contenedor" id="resultados" aria-labelledby="titulo-res">
+    <div class="seccion__cabeza">
+      <h2 id="titulo-res">Seis años de resultados</h2>
+      <p>Backtest de la versión <span data-campo="version">v2.5</span> sobre 20 criptomonedas, con comisiones, deslizamiento y costos de financiación incluidos.</p>
+    </div>
+
+    <dl class="cifras" id="cifras"></dl>
+
+    <figure class="figura">
+      <figcaption>
+        <h3>Cuánto habrían valido 100 dólares</h3>
+        <p id="pie-curva"></p>
+      </figcaption>
+      <div class="grafico-linea">
+        <canvas id="lienzo-curva" role="img" aria-label="Curva de capital de Rogelio comparada con comprar y mantener Bitcoin"></canvas>
+      </div>
+      <ul class="leyenda leyenda--clara" id="leyenda-curva"></ul>
+    </figure>
+
+    <div class="dos-columnas">
+      <div>
+        <h3>Año por año</h3>
+        <p class="explica">Rendimiento de la cuenta en cada año calendario. Desde <span data-campo="fuera">2024</span> son datos que Rogelio no conocía cuando se diseñaron sus reglas.</p>
+        <div class="barras" id="barras-anio"></div>
+      </div>
+      <div>
+        <h3>Sus tres estrategias</h3>
+        <p class="explica">Cada una busca un tipo distinto de despertar del mercado y se mide por separado.</p>
+        <div class="estrategias" id="tabla-estrategias"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Riesgo -->
+  <section class="seccion seccion--banda" id="riesgo" aria-labelledby="titulo-riesgo">
+    <div class="contenedor">
+      <div class="seccion__cabeza">
+        <h2 id="titulo-riesgo">Más riesgo no es gratis</h2>
+        <p>Mové el control para ver qué habría pasado si Rogelio arriesgara más o menos en cada operación. La ganancia sube, pero las caídas crecen más rápido.</p>
+      </div>
+      <div class="simulador">
+        <div class="simulador__controles">
+          <label for="ctrl-riesgo" class="simulador__etiqueta">Riesgo por operación</label>
+          <output id="salida-riesgo" class="simulador__valor">1,5% de la cuenta</output>
+          <input type="range" id="ctrl-riesgo" min="0.25" max="2.5" step="0.25" value="1">
+          <div class="simulador__escala"><span>Prudente</span><span>Agresivo</span></div>
+          <dl class="simulador__resultados">
+            <div><dt>Rendimiento anual</dt><dd id="sim-anual">—</dd></div>
+            <div><dt>Peor caída</dt><dd id="sim-caida">—</dd></div>
+            <div><dt>1.000 dólares se convierten en</dt><dd id="sim-final">—</dd></div>
+          </dl>
+          <p class="simulador__alerta" id="sim-alerta" hidden>Con este nivel, la caída habría pasado el 20% y Rogelio se habría apagado solo, por seguridad.</p>
+        </div>
+        <div class="simulador__grafico">
+          <canvas id="lienzo-riesgo" role="img" aria-label="Curva de capital aproximada según el riesgo elegido"></canvas>
+          <p class="explica">Aproximación: suma las operaciones en orden de cierre y no vuelve a aplicar los límites de cartera. La línea gris es el nivel de riesgo real de Rogelio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo decide -->
+  <section class="seccion contenedor" id="como-decide" aria-labelledby="titulo-decide">
+    <div class="seccion__cabeza">
+      <h2 id="titulo-decide">Cómo decide una operación</h2>
+      <p>Las mismas cuatro preguntas, en el mismo orden, cada cuatro horas y en cada moneda.</p>
+    </div>
+    <ol class="pasos">
+      <li>
+        <svg viewBox="0 0 120 48" aria-hidden="true"><path class="trazo" d="M4 26 L14 24 L22 27 L30 23 L38 26 L46 24 L54 27 L62 24 L70 26 L78 23 L86 26 L94 24 L102 26 L116 25"/></svg>
+        <h3>¿El mercado está dormido?</h3>
+        <p>Busca monedas cuyo precio viene moviéndose mucho menos que lo habitual. Esa calma suele anticipar un movimiento grande.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 120 48" aria-hidden="true"><path class="trazo" d="M4 30 L14 28 L22 31 L30 27 L38 30 L46 28 L54 31 L62 29 L70 31"/><path class="trazo trazo--acento" d="M70 31 L80 22 L88 25 L98 12 L106 15 L116 5"/><path class="guia" d="M4 26 H116"/></svg>
+        <h3>¿Se está despertando?</h3>
+        <p>Espera a que el precio salga del rango con volumen alto y fuerza creciente. La decisión se toma al cierre de la vela, nunca a mitad de camino.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 120 48" aria-hidden="true"><rect class="trazo" x="44" y="6" width="32" height="36" rx="5"/><path class="trazo trazo--acento" d="M52 24 l6 6 l11 -12"/><path class="trazo" d="M8 24 H40 M80 24 H112"/></svg>
+        <h3>¿Vale la pena?</h3>
+        <p>Revisa si los demás traders ya están muy cargados del mismo lado y le pide a un modelo de <em>machine learning</em> la probabilidad de ganar. Si no convence, no entra.</p>
+      </li>
+      <li>
+        <svg viewBox="0 0 120 48" aria-hidden="true"><rect class="zona-o" x="30" y="6" width="80" height="18"/><rect class="zona-s" x="30" y="24" width="80" height="12"/><path class="trazo" d="M10 24 H110"/></svg>
+        <h3>¿Cuánto arriesgar y dónde salir?</h3>
+        <p>Calcula el tamaño para perder un porcentaje fijo si toca el stop, mueve el stop a la entrada cuando la operación avanza y deja correr las ganadoras.</p>
+      </li>
+    </ol>
+
+    <div class="reglas">
+      <h3>Las reglas que nunca se rompen</h3>
+      <ul>
+        <li>Cada operación arriesga un porcentaje chico y conocido de la cuenta.</li>
+        <li>Nunca más de 6 operaciones abiertas, y una sola por moneda.</li>
+        <li>Si pierde 3% en un día, no abre nada más ese día.</li>
+        <li>Si la cuenta cae 20% desde su máximo, se apaga solo.</li>
+        <li>No opera alrededor de anuncios económicos programados.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Proyecto -->
+  <section class="seccion seccion--banda" id="proyecto" aria-labelledby="titulo-proyecto">
+    <div class="contenedor">
+      <div class="seccion__cabeza">
+        <h2 id="titulo-proyecto">Cómo llegué hasta acá</h2>
+        <p>Probé 68 variantes sobre los mismos datos. Las que fallaron me enseñaron tanto como las que funcionaron.</p>
+      </div>
+      <ol class="historia">
+        <li><b>v1</b><span>Tres ideas y un solo modelo. Perdía plata: hubo que empezar de nuevo.</span></li>
+        <li><b>v1.1</b><span>Dos cambios chicos, como no operar cuando los demás ya están cargados del mismo lado, y apareció la primera ventaja.</span></li>
+        <li><b>v2</b><span>Tres estrategias medidas por separado. 15,9% anual con una caída máxima de 8,9%: la base sólida.</span></li>
+        <li class="historia__falla"><b>v2.1 a v2.3</b><span>Velas de una hora y muchos cambios a la vez. Más riesgo o menos ganancia: descartadas.</span></li>
+        <li class="historia__actual"><b>v2.5</b><span>La base de v2 con el riesgo calibrado. Es la versión de esta página y la candidata a operar en un entorno de prueba.</span></li>
+        <li class="historia__falla"><b>v2.6 y v2.7</b><span>Más monedas y una rutina diaria. Las reglas siguieron funcionando en monedas nuevas, pero entrar tarde destruía la ventaja.</span></li>
+      </ol>
+
+      <div class="autor">
+        <div>
+          <h3>Mi rol</h3>
+          <p>Soy <strong data-campo="autor">Nicolás Barrera</strong> y desarrollé Rogelio de forma independiente, de la idea al sistema funcionando. Lo encaré como un proyecto de investigación: cada decisión tenía que sostenerse con datos.</p>
+          <ul class="rol">
+            <li><strong>Definí el problema y el perfil de riesgo.</strong> Fijé el rendimiento buscado, la caída máxima tolerable y las reglas de corte antes de escribir una sola estrategia.</li>
+            <li><strong>Dirigí la investigación.</strong> Basé las estrategias en literatura académica y profesional, y descarté copiar a los traders de los rankings, cuyos resultados no se sostienen en el tiempo.</li>
+            <li><strong>Diseñé el método de validación.</strong> Separé los datos de diseño de los datos nuevos, llevé la cuenta de cada variante probada y fijé una regla: una versión solo reemplaza a la anterior si mejora la relación entre ganancia y riesgo con datos que no conocía.</li>
+            <li><strong>Tomé las decisiones de dirección.</strong> Reformulé el enfoque cuando la primera versión no tuvo ventaja, volví a la base validada cuando cambiar muchas cosas a la vez empeoró los resultados y elegí un riesgo moderado, aunque uno más alto mostraba 30% anual.</li>
+            <li><strong>Construí el sistema completo.</strong> Descarga de datos, indicadores, señales, modelo predictivo, simulador con costos reales, informes estadísticos y esta página, en Python y con desarrollo asistido por IA.</li>
+          </ul>
+          <p>Próximo paso: validar a Rogelio en el entorno de prueba de Binance, operando en tiempo real con dinero ficticio.</p>
+        </div>
+        <div class="autor__enlaces">
+          <a class="boton" id="enlace-github" href="#" target="_blank" rel="noopener">Ver el código en GitHub</a>
+          <a class="boton boton--borde" id="enlace-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p>Los resultados son de una simulación histórica (backtest), no de operación real. El rendimiento pasado no garantiza resultados futuros. Este proyecto es autónomo y no es asesoramiento financiero.</p>
+    <p class="pie__gen" id="pie-generado"></p>
+  </div>
+</footer>
+
+<noscript><p class="contenedor">Esta página necesita JavaScript para mostrar los gráficos.</p></noscript>
+
+<script src="replay/resumen.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

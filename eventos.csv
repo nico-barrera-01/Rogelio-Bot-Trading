@@ -1,0 +1,48 @@
+fecha,evento,categoria,programado,confianza
+2020-03-12,Crash por COVID (Jueves Negro),macro,no,alta
+2020-03-15,Fed baja tasas a cero y lanza QE ilimitado,politica_monetaria,no,alta
+2020-05-11,Tercer halving de Bitcoin,halving,si,alta
+2020-08-11,MicroStrategy anuncia su primera compra de BTC,institucional,no,alta
+2020-10-21,PayPal habilita compra y venta de cripto,institucional,no,alta
+2021-02-08,Tesla revela compra de USD 1.500 M en BTC,institucional,no,alta
+2021-04-14,Coinbase sale a cotizar en Nasdaq,institucional,si,alta
+2021-05-12,Tesla suspende pagos con BTC por impacto ambiental,institucional,no,alta
+2021-05-19,Desplome tras advertencias de China sobre cripto,regulacion,no,alta
+2021-06-09,El Salvador aprueba BTC como moneda de curso legal,regulacion,no,alta
+2021-06-21,China ordena cerrar la minería en Sichuan,regulacion,no,alta
+2021-09-07,Entra en vigor la ley Bitcoin en El Salvador,regulacion,si,alta
+2021-09-24,China declara ilegales todas las transacciones cripto,regulacion,no,alta
+2021-10-19,Debuta el primer ETF de futuros de BTC en EE.UU. (BITO),institucional,si,alta
+2021-11-10,Máximo histórico cerca de USD 69.000 y dato de inflación alto en EE.UU.,mercado,no,alta
+2022-01-05,Minutas de la Fed anticipan ajuste agresivo,politica_monetaria,si,alta
+2022-03-16,Fed realiza su primera suba de tasas del ciclo,politica_monetaria,si,alta
+2022-05-09,Colapso de la stablecoin UST y de LUNA (Terra),colapso,no,alta
+2022-06-13,Celsius congela retiros,colapso,no,alta
+2022-06-15,Fed sube tasas 75 puntos básicos,politica_monetaria,si,alta
+2022-09-15,The Merge: Ethereum pasa a prueba de participación,tecnologia,si,alta
+2022-11-08,Crisis de FTX: Binance anuncia y luego abandona su rescate,colapso,no,alta
+2022-11-11,FTX se declara en quiebra,colapso,no,alta
+2023-03-10,Quiebra de Silicon Valley Bank y pérdida de paridad de USDC,colapso,no,alta
+2023-06-05,La SEC demanda a Binance,regulacion,no,alta
+2023-06-06,La SEC demanda a Coinbase,regulacion,no,alta
+2023-06-15,BlackRock solicita un ETF spot de BTC,institucional,no,alta
+2023-08-29,Grayscale gana el juicio contra la SEC por su ETF,regulacion,no,alta
+2023-11-21,Binance acuerda con el Departamento de Justicia y CZ renuncia,regulacion,no,alta
+2024-01-10,La SEC aprueba los ETF spot de BTC,institucional,si,alta
+2024-03-14,Máximo histórico cerca de USD 73.000,mercado,no,alta
+2024-04-20,Cuarto halving de Bitcoin,halving,si,alta
+2024-05-23,La SEC aprueba las solicitudes de ETF spot de ETH,institucional,si,alta
+2024-08-05,Crash global por el desarme del carry trade del yen,macro,no,alta
+2024-09-18,Fed recorta tasas 50 puntos básicos,politica_monetaria,si,alta
+2024-11-06,Trump gana la elección presidencial de EE.UU.,politica,si,alta
+2024-12-05,BTC supera por primera vez USD 100.000,mercado,no,alta
+2024-12-18,Fed recorta pero anticipa menos bajas para 2025,politica_monetaria,si,alta
+2025-01-20,Asunción presidencial de Trump,politica,si,alta
+2025-02-21,Hackeo a Bybit por unos USD 1.500 M,seguridad,no,alta
+2025-03-06,Orden ejecutiva que crea la Reserva Estratégica de Bitcoin de EE.UU.,regulacion,no,alta
+2025-04-02,Anuncio de aranceles generalizados de EE.UU. (Liberation Day),macro,no,alta
+2025-04-09,EE.UU. pausa 90 días la mayoría de los aranceles,macro,no,alta
+2025-07-18,Se firma la ley GENIUS de stablecoins en EE.UU.,regulacion,no,alta
+2025-10-06,BTC marca máximo histórico cerca de USD 126.000,mercado,no,media
+2025-10-10,Liquidación récord en derivados tras amenaza de aranceles a China,macro,no,media
+2026-01-08,Binance lista perpetuos de commodities y acciones,institucional,no,media

@@ -1,0 +1,66 @@
+# =============================================
+# Rogelio — archivos que NO se suben a GitHub
+# =============================================
+
+# --- Claves y secretos (nunca subir) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.py
+claves.py
+credenciales*
+api_keys*
+
+# --- Entornos virtuales de Python ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Archivos generados por Python ---
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+build/
+dist/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Datos descargados (pesados, se regeneran con datos.py) ---
+# Con "/" adelante solo se ignoran en la raíz: docs/replay/ (la página) SÍ se sube.
+/datos/
+/data/
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.h5
+
+# --- Resultados generados (se regeneran con rogelio.py) ---
+# reportes/ SÍ se sube: son los resultados del proyecto (informes, gráficos, operaciones).
+/logs/
+_demo_web/
+*.log
+
+# --- Modelos entrenados ---
+/modelos/
+*.joblib
+
+# --- VS Code (configuración local) ---
+.vscode/*
+!.vscode/extensions.json
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Temporales ---
+*.tmp
+*.bak
+*.swp
+~$*

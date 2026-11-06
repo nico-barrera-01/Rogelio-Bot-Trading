@@ -1,0 +1,223 @@
+==============================================================================
+ROGELIO v2.7 - INFORME   (2021-03-09 a 2026-10-10)
+==============================================================================
+
+######## 1. CADA ESTRATEGIA POR SEPARADO ########
+
+--- Señales de cada estrategia ANTES de modelo y riesgo (corte de validación: 2024-01-01) ---
+            ops_antes  wr_antes  expR_antes  t_mensual_antes  ops_despues  wr_despues  expR_despues  t_mensual_despues
+estrategia                                                                                                            
+batacazo          464     0.427       0.293            1.665          513       0.384         0.160              0.814
+comprador         164     0.396       0.156            1.128          162       0.370        -0.019             -0.136
+vendedor          240     0.425       0.119            0.775          289       0.426         0.158              0.822
+
+--- Operaciones EJECUTADAS por Rogelio, por estrategia ---
+            ops_antes  wr_antes  expR_antes  t_mensual_antes  ops_despues  wr_despues  expR_despues  t_mensual_despues
+estrategia                                                                                                            
+batacazo          111     0.387       0.261            1.047          123       0.463         0.255              1.467
+comprador          57     0.386       0.082            0.678           43       0.442         0.213              0.869
+vendedor           80     0.475       0.224            1.461           55       0.545         0.348              1.703
+
+######## 1b. PRUEBA FUERA DE MUESTRA: MONEDAS NUEVAS (las reglas nunca las vieron) ########
+
+--- Señales antes de modelo y riesgo, por grupo de monedas ---
+            ops_antes  wr_antes  expR_antes  t_mensual_antes  ops_despues  wr_despues  expR_despues  t_mensual_despues
+grupo                                                                                                                 
+originales        868     0.421       0.219            1.767          964       0.394         0.129              0.871
+
+--- Señales por estrategia y grupo ---
+                        ops_antes  wr_antes  expR_antes  t_mensual_antes  ops_despues  wr_despues  expR_despues  t_mensual_despues
+estrategia_grupo                                                                                                                  
+batacazo / originales         464     0.427       0.293            1.665          513       0.384         0.160              0.814
+comprador / originales        164     0.396       0.156            1.128          162       0.370        -0.019             -0.136
+vendedor / originales         240     0.425       0.119            0.775          289       0.426         0.158              0.822
+
+--- Operaciones EJECUTADAS, por grupo ---
+            ops_antes  wr_antes  expR_antes  t_mensual_antes  ops_despues  wr_despues  expR_despues  t_mensual_despues
+grupo                                                                                                                 
+originales        248     0.415       0.208            1.623          221       0.480         0.270              1.798
+  Ganancia en USDT por grupo: originales: 2,278
+
+>>> VENDEDOR  (Ventas en rupturas bajistas cuando los compradores están sobrecargados)
+  operaciones                                   135
+  win_rate                                      50.37%
+  win_rate_IC95_wilson                          [0.420 ; 0.587]
+  win_rate_IC95_bayes                           [0.420 ; 0.587]
+  ganancia_media_R                              1.359
+  perdida_media_R                               0.826
+  relacion_b                                    1.646
+  win_rate_equilibrio                           37.80%
+  P(win_rate > equilibrio)                      99.86%
+  expectativa_R                                 0.275
+  expectativa_IC95_bootstrap                    [0.067 ; 0.475]
+  test_t                                        2.511
+  p_valor                                       0.007
+  test_t_mensual (más confiable)                2.252
+  profit_factor                                 1.670
+  SQN                                           2.161
+  kelly_completo                                20.22%
+  racha_perdedora_maxima                        5
+  ganancia en USDT                              1,155.9
+  riesgo medio por operación                    1.66%
+
+>>> COMPRADOR  (Compras en rupturas alcistas con BTC en tendencia alcista)
+  operaciones                                   100
+  win_rate                                      41.00%
+  win_rate_IC95_wilson                          [0.319 ; 0.508]
+  win_rate_IC95_bayes                           [0.319 ; 0.508]
+  ganancia_media_R                              1.467
+  perdida_media_R                               0.785
+  relacion_b                                    1.868
+  win_rate_equilibrio                           34.87%
+  P(win_rate > equilibrio)                      90.40%
+  expectativa_R                                 0.138
+  expectativa_IC95_bootstrap                    [-0.118 ; 0.375]
+  test_t                                        1.107
+  p_valor                                       0.135
+  test_t_mensual (más confiable)                1.112
+  profit_factor                                 1.298
+  SQN                                           1.107
+  kelly_completo                                9.41%
+  racha_perdedora_maxima                        6
+  ganancia en USDT                              342.7
+  riesgo medio por operación                    1.70%
+
+>>> BATACAZO  (Rupturas de compresiones extremas con volumen muy alto, sin techo de ganancia)
+  operaciones                                   234
+  win_rate                                      42.74%
+  win_rate_IC95_wilson                          [0.366 ; 0.491]
+  win_rate_IC95_bayes                           [0.366 ; 0.491]
+  ganancia_media_R                              1.965
+  perdida_media_R                               1.016
+  relacion_b                                    1.934
+  win_rate_equilibrio                           34.09%
+  P(win_rate > equilibrio)                      99.72%
+  expectativa_R                                 0.258
+  expectativa_IC95_bootstrap                    [0.013 ; 0.526]
+  test_t                                        2.002
+  p_valor                                       0.023
+  test_t_mensual (más confiable)                1.740
+  profit_factor                                 1.443
+  SQN                                           1.309
+  kelly_completo                                13.12%
+  racha_perdedora_maxima                        7
+  ganancia en USDT                              778.9
+  riesgo medio por operación                    0.75%
+
+--- Correlación mensual entre estrategias (cerca de 0 o negativa = se complementan) ---
+estrategia  batacazo  comprador  vendedor
+estrategia                               
+batacazo       +1.00      +0.19     +0.25
+comprador      +0.19      +1.00     -0.03
+vendedor       +0.25      -0.03     +1.00
+
+--- ¿El batacazo le quita lugar a las otras? ---
+  Operaciones de vendedor/comprador frenadas mientras el batacazo ocupaba lugar: 90
+  (sobre 235 operaciones ejecutadas de vendedor/comprador)
+  ATENCIÓN: el batacazo frena más del 10%: considerar bajar su presupuesto o sacarlo.
+
+######## 2. LA CUENTA COMPLETA (las tres juntas) ########
+
+--- OPERACIONES EJECUTADAS ---
+  operaciones                                   469
+  win_rate                                      44.56%
+  win_rate_IC95_wilson                          [0.401 ; 0.491]
+  win_rate_IC95_bayes                           [0.401 ; 0.491]
+  ganancia_media_R                              1.670
+  perdida_media_R                               0.915
+  relacion_b                                    1.826
+  win_rate_equilibrio                           35.39%
+  P(win_rate > equilibrio)                      100.00%
+  expectativa_R                                 0.237
+  expectativa_IC95_bootstrap                    [0.090 ; 0.393]
+  test_t                                        3.111
+  p_valor                                       0.001
+  test_t_mensual (más confiable)                2.439
+  profit_factor                                 1.468
+  SQN                                           1.436
+  kelly_completo                                14.20%
+  racha_perdedora_maxima                        10
+  apalancamiento medio usado                    4.8x
+
+--- CARTERA CON MODELOS (escala de riesgo 1.50) ---
+  capital_final                                 3,277.507
+  retorno_total                                 227.75%
+  CAGR                                          23.67%
+  drawdown_maximo                               -13.16%
+  dias_maximos_bajo_maximo                      229
+  sharpe_anual                                  1.184
+  sortino_anual                                 1.669
+  calmar                                        1.798
+  sharpe_probabilistico                         1.000
+  sharpe_deflactado                             0.830
+  ¿alcanza el objetivo de 30% anual?            NO
+
+--- CARTERA SOLO REGLAS (sin modelos, riesgo fijo) ---
+  capital_final                                 2,220.718
+  retorno_total                                 122.07%
+  CAGR                                          15.35%
+  drawdown_maximo                               -19.40%
+  dias_maximos_bajo_maximo                      247
+  sharpe_anual                                  0.810
+  sortino_anual                                 1.084
+  calmar                                        0.791
+  sharpe_probabilistico                         0.982
+  sharpe_deflactado                             0.386
+
+--- MONTE CARLO (5.000 órdenes distintas de las mismas operaciones) ---
+  retorno_mediano                               246.99%
+  retorno_percentil_5                           82.14%
+  retorno_percentil_95                          569.43%
+  P(terminar en pérdida)                        0.04%
+  drawdown_mediano                              -16.41%
+  drawdown_percentil_95                         -26.69%
+  P(drawdown >= 20%, se activa el corte)        23.48%
+
+--- RESULTADO POR AÑO ---
+estrategia  batacazo  comprador  vendedor  TOTAL
+anio                                            
+2021               8         75        21    104
+2022              15        -18       263    260
+2023             242        -33        78    287
+2024             159        158       213    530
+2025              87         58       119    264
+2026             268        103       462    833
+TOTAL            779        343     1,156  2,278
+
+--- OPERACIONES DESCARTADAS ---
+  batacazo: max_posiciones_estrategia                342
+  batacazo: moneda_ya_abierta                        188
+  vendedor: filtro_modelo                            152
+  batacazo: max_misma_direccion                      120
+  vendedor: moneda_ya_abierta                        116
+  comprador: filtro_modelo                           104
+  vendedor: max_misma_direccion                      87
+  comprador: moneda_ya_abierta                       52
+  vendedor: max_posiciones_estrategia                22
+  comprador: max_posiciones_estrategia               13
+  comprador: max_misma_direccion                     3
+  vendedor: limite_perdida_diaria                    1
+  batacazo: limite_perdida_diaria                    1
+  comprador: limite_perdida_diaria                   1
+
+--- VARIABLES MÁS IMPORTANTES: modelo de vendedor ---
+         variable  importancia
+0      dia_semana       0.0633
+1             adx       0.0406
+2         vol_pct       0.0221
+3   obv_pendiente       0.0173
+4   macd_hist_atr       0.0165
+5      retorno_1d       0.0135
+6  btc_retorno_7d       0.0115
+7      eficiencia       0.0111
+
+--- VARIABLES MÁS IMPORTANTES: modelo de comprador ---
+           variable  importancia
+0    dist_ema50_atr       0.0422
+1       btc_vol_pct       0.0253
+2  dist_soporte_atr       0.0191
+3   pendiente_ema50       0.0186
+4               adx       0.0171
+5     obv_pendiente       0.0154
+6        dia_semana       0.0123
+7    fuerza_soporte       0.0091
