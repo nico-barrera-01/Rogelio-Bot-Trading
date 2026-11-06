@@ -32,7 +32,7 @@ La versión **2.5** es el candidato para pasar a testnet. Fue elegida después d
 
 \*2021 desde el 9 de marzo y 2026 hasta el 10 de octubre (años incompletos).
 
-### 👉 [Ver la repetición interactiva](https://nico-barrera-01.github.io/rogelio-bot-trading/)
+### 👉 [Ver la repetición interactiva](https://nico-barrera-01.github.io/Rogelio-Bot-Trading/)
 
 Una página para recorrer el backtest vela por vela, sin instalar nada: cada operación con su entrada, stop, objetivo y resultado, la curva de capital y un simulador de riesgo.
 
